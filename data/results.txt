@@ -1,0 +1,28 @@
+=== Log Processing System ===
+Reading from: data/sample.log
+==============================
+[Thread 2] INFO - 2026-03-30 19:50:09 - Server started on port 8080
+[Thread 2] INFO - 2026-03-30 19:50:09 - Request received from 192.168.1.1
+[Thread 2] ERROR - 2026-03-30 19:50:09 - Failed to parse request body
+[Thread 2] INFO - 2026-03-30 19:50:09 - Request received from 192.168.1.2
+[Thread 2] WARN - 2026-03-30 19:50:09 - Response time exceeded 500ms
+[Thread 2] INFO - 2026-03-30 19:50:09 - Cache hit for key: user_42
+[Thread 2] ERROR - 2026-03-30 19:50:09 - Database connection timed out
+[Thread 2] INFO - 2026-03-30 19:50:09 - Retrying database connection
+[Thread 2] INFO - 2026-03-30 19:50:09 - Database reconnected successfully
+[Thread 2] WARN - 2026-03-30 19:50:09 - Disk usage at 85%
+[Thread 2] ERROR - 2026-03-30 19:50:09 - Null pointer exception in handler
+[Thread 2] INFO - 2026-03-30 19:50:09 - Graceful shutdown initiated
+[Thread 2] INFO - 2026-03-30 19:50:09 - All connections closed
+[Thread 1] INFO - 2026-03-30 19:50:09 - Connected to database
+[Thread 3] WARN - 2026-03-30 19:50:09 - Memory usage at 72%
+[Thread 3] done.
+[Thread 1] done.
+[Thread 2] done.
+
+=== Processing Complete ===
+Total INFO  : 9
+Total WARN  : 3
+Total ERROR : 3
+Total lines : 15
+===========================

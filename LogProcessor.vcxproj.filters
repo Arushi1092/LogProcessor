@@ -1,0 +1,74 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Source Files">
+      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
+      <Extensions>cpp;c;cc;cxx;c++;cppm;ixx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    </Filter>
+    <Filter Include="Header Files">
+      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
+      <Extensions>h;hh;hpp;hxx;h++;hm;inl;inc;ipp;xsd</Extensions>
+    </Filter>
+    <Filter Include="Resource Files">
+      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
+      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
+    </Filter>
+    <Filter Include="src">
+      <UniqueIdentifier>{07f0fe4b-5a62-4ddb-9843-23b13d7ee5a3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="include">
+      <UniqueIdentifier>{b7de764d-4b7a-42cb-ba1a-258e178bc4ad}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="data">
+      <UniqueIdentifier>{56da530d-a1fc-4f7a-b426-b9342b8c7779}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="main.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="logreader.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="parser.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="worker.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="logprocessor.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="concurrentQueue.h">
+      <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="logentry.h">
+      <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="parser.h">
+      <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="logreader.h">
+      <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="logprocessor.h">
+      <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="timestamp_parser.h">
+      <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="worker.h">
+      <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="threadPool.h">
+      <Filter>include</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="sample.log">
+      <Filter>data</Filter>
+    </Text>
+  </ItemGroup>
+</Project>

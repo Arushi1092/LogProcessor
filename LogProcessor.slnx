@@ -1,0 +1,10 @@
+<Solution>
+  <Configurations>
+    <Platform Name="x64" />
+    <Platform Name="x86" />
+  </Configurations>
+  <Project Path="../LogprocessorTests/LogprocessorTests.vcxproj" Id="b5920741-458f-4867-b09b-d3836c98ac3d">
+    <BuildType Solution="Debug|x64" Project="Release" />
+  </Project>
+  <Project Path="LogProcessor/LogProcessor.vcxproj" Id="7ca44114-179f-4269-89e6-b1953e8e9008" />
+</Solution>

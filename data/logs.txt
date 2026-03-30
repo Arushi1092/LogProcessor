@@ -1,0 +1,4 @@
+INFO User login
+ERROR Database failed
+WARN Disk full
+INFO Payment success
