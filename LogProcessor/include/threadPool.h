@@ -6,6 +6,7 @@
 #include <condition_variable>
 #include <functional>
 #include <future>
+#include <atomic>
 #include <stdexcept>
 
 class ThreadPool {
@@ -14,11 +15,11 @@ private:
     std::queue<std::function<void()>> taskQueue;
     std::mutex                        queueMutex;
     std::condition_variable           cv;
-    bool                              stop = false;
+    std::atomic<bool>                 stop{ false };  // atomic: safe to read without lock
 
 public:
-    // constructor — spawns numThreads workers immediately
-    ThreadPool(size_t numThreads) {
+    explicit ThreadPool(size_t numThreads) {
+        workers.reserve(numThreads);
         for (size_t i = 0; i < numThreads; i++) {
             workers.emplace_back([this] {
                 while (true) {
@@ -26,34 +27,37 @@ public:
                     {
                         std::unique_lock<std::mutex> lock(queueMutex);
                         cv.wait(lock, [this] {
-                            return stop || !taskQueue.empty();
+                            return stop.load() || !taskQueue.empty();
                             });
-                        if (stop && taskQueue.empty()) return;
+                        if (stop.load() && taskQueue.empty()) return;
                         task = std::move(taskQueue.front());
                         taskQueue.pop();
-                    }
-                    task();   // execute outside the lock
+                    }   // lock released here — task runs in parallel
+                    task();
                 }
                 });
         }
     }
 
-    // submit any callable — returns a future so caller can wait for result
+    // Submit any callable — returns a future for the result
     template<typename F, typename... Args>
     auto submit(F&& f, Args&&... args)
         -> std::future<std::invoke_result_t<F, Args...>>
     {
         using ReturnType = std::invoke_result_t<F, Args...>;
 
+        // Lambda capture instead of std::bind — avoids copies of move-only args
         auto task = std::make_shared<std::packaged_task<ReturnType()>>(
-            std::bind(std::forward<F>(f), std::forward<Args>(args)...)
+            [f = std::forward<F>(f),
+            args = std::make_tuple(std::forward<Args>(args)...)]() mutable {
+                return std::apply(std::move(f), std::move(args));
+            }
         );
 
         std::future<ReturnType> result = task->get_future();
-
         {
             std::unique_lock<std::mutex> lock(queueMutex);
-            if (stop)
+            if (stop.load())
                 throw std::runtime_error("Cannot submit to stopped ThreadPool");
             taskQueue.emplace([task]() { (*task)(); });
         }
@@ -61,14 +65,16 @@ public:
         return result;
     }
 
-    // destructor — shuts down cleanly, waits for all tasks to finish
     ~ThreadPool() {
         {
             std::unique_lock<std::mutex> lock(queueMutex);
-            stop = true;
+            stop.store(true);
         }
         cv.notify_all();
-        for (auto& worker : workers)
-            worker.join();
+        for (auto& w : workers) w.join();
     }
+
+    // Non-copyable, non-movable
+    ThreadPool(const ThreadPool&) = delete;
+    ThreadPool& operator=(const ThreadPool&) = delete;
 };

@@ -1,0 +1,10 @@
+=== Log Processing System ===
+Reading from : data/sample.log
+==============================
+
+=== Processing Complete ===
+Total INFO  : 0
+Total WARN  : 0
+Total ERROR : 0
+Total lines : 0
+===========================

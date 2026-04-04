@@ -77,6 +77,7 @@
       <PreprocessorDefinitions>WIN32;_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
       <LanguageStandard>stdcpp20</LanguageStandard>
+      <AdditionalIncludeDirectories>$(ProjectDir);$(ProjectDir)include;$(ProjectDir)src;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -92,6 +93,7 @@
       <PreprocessorDefinitions>WIN32;NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
       <LanguageStandard>stdcpp20</LanguageStandard>
+      <AdditionalIncludeDirectories>$(ProjectDir);$(ProjectDir)include;$(ProjectDir)src;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -105,7 +107,7 @@
       <PreprocessorDefinitions>_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
       <LanguageStandard>stdcpp20</LanguageStandard>
-      <AdditionalIncludeDirectories>include;</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(ProjectDir);$(ProjectDir)include;$(ProjectDir)src;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -121,6 +123,7 @@
       <PreprocessorDefinitions>NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
       <LanguageStandard>stdcpp20</LanguageStandard>
+      <AdditionalIncludeDirectories>$(ProjectDir);$(ProjectDir)include;$(ProjectDir)src;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -129,24 +132,21 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="logprocessor.cpp" />
-    <ClCompile Include="logreader.cpp">
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">false</ExcludedFromBuild>
-    </ClCompile>
-    <ClCompile Include="main.cpp">
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">false</ExcludedFromBuild>
-    </ClCompile>
-    <ClCompile Include="parser.cpp" />
+    <ClCompile Include="logreader.cpp" />
     <ClCompile Include="worker.cpp" />
+    <ClCompile Include="src\main.cpp" />
+    <ClCompile Include="src\parser.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="concurrentQueue.h" />
-    <ClInclude Include="logentry.h" />
+    <ClInclude Include="pch.h" />
     <ClInclude Include="logprocessor.h" />
     <ClInclude Include="logreader.h" />
     <ClInclude Include="parser.h" />
-    <ClInclude Include="threadPool.h" />
     <ClInclude Include="timestamp_parser.h" />
     <ClInclude Include="worker.h" />
+    <ClInclude Include="include\concurrentQueue.h" />
+    <ClInclude Include="include\threadPool.h" />
+    <ClInclude Include="include\logentry.h" />
   </ItemGroup>
   <ItemGroup>
     <Text Include="sample.log" />

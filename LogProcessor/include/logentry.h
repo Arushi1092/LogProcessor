@@ -53,10 +53,13 @@ struct LogEntry {
         ss >> std::get_time(&tm, "%Y-%m-%d %H:%M:%S");
 
         if (!ss.fail()) {
-            return std::chrono::system_clock::from_time_t(std::mktime(&tm));
+#ifdef _WIN32
+            return std::chrono::system_clock::from_time_t(_mkgmtime(&tm)); // no tz lookup
+#else
+            return std::chrono::system_clock::from_time_t(timegm(&tm));    // same, POSIX
+#endif
         }
-
-        return std::chrono::system_clock::time_point();
+        return std::chrono::system_clock::time_point{};
     }
 
     static std::string formatTimestamp(const std::chrono::system_clock::time_point& tp) {
