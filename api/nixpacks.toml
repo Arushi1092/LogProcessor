@@ -1,0 +1,11 @@
+[phases.setup]
+nixPkgs = ["gcc", "python311"]
+
+[phases.build]
+cmds = [
+  "g++ -std=c++17 -pthread -o LogProcessor ../LogProcessor/src/main.cpp ../LogProcessor/src/parser.cpp ../LogProcessor/logprocessor.cpp ../LogProcessor/logreader.cpp -I../LogProcessor/include",
+  "pip install -r requirements.txt"
+]
+
+[start]
+cmd = "uvicorn app:app --host 0.0.0.0 --port $PORT"
